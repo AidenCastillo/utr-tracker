@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/router";
+import PocketBase from "pocketbase";
 
 export default function AddPlayer() {
   const [name, setName] = useState("");
@@ -10,15 +11,9 @@ export default function AddPlayer() {
 
   const create = async () => {
 		console.log(name);
-    await fetch("http://127.0.0.1:8090/api/collections/watchlist/records", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-      }),
-    });
+    const pb = new PocketBase("http://127.0.0.1:8090");
+    
+    await pb.collection("watchlist").create({ name: name });
 
 		setName("");
 

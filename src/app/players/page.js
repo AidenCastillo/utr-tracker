@@ -37,7 +37,7 @@ export default async function playersPage() {
 
 async function Player({ name }) {
   const searchdata = await utr.searchPlayer(name);
-  const player = await utr.getPlayer(searchdata.hits[0].source.id);
+  const player = await utr.getPlayer(searchdata["hits"][0].source.id);
   const singlesUTR = player.singlesUtr;
   
 
